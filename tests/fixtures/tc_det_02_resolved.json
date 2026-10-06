@@ -1,0 +1,1 @@
+{"export_traversal": true, "hash_compare": true, "indirect_call": true, "module": "ntdll.dll", "name_iteration": true, "peb_access": true}

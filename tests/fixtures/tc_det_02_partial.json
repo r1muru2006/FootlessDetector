@@ -1,0 +1,1 @@
+{"export_traversal": true, "hash_compare": false, "indirect_call": false, "module": "kernel32.dll", "name_iteration": true, "peb_access": true}

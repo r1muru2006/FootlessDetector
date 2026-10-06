@@ -1,0 +1,1 @@
+{"imports": ["LoadLibraryA", "GetProcAddress", "VirtualAlloc"], "runtime_api_count": 4}

@@ -1,0 +1,1 @@
+{"imports": ["CreateFileW", "ReadFile", "WriteFile", "CloseHandle", "LoadLibraryA", "GetProcAddress", "VirtualAlloc", "VirtualProtect", "CreateThread", "OpenProcess", "WriteProcessMemory", "CreateRemoteThread"], "runtime_api_count": 17}
