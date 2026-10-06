@@ -1,0 +1,1 @@
+{"comparison_constants": 3, "function": "0x140001500", "loop": null, "operations": ["READ_BYTE", "XOR", "ROL", "ADD"], "traverses_bytes": true}
