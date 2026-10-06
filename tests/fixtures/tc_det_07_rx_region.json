@@ -1,0 +1,1 @@
+{"base_address": "0x300000", "owner_pid": 3312, "owner_process": "target.exe", "protection": "RX", "size": 8192, "state": "committed", "type": "private"}

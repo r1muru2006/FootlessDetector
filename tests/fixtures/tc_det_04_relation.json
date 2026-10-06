@@ -1,0 +1,1 @@
+{"event_type": "process_memory_operation", "operation": "write_memory", "source_name": "loader.exe", "source_pid": 4210, "target_name": "target.exe", "target_pid": 3312, "timestamp": "2026-10-05T08:20:03"}

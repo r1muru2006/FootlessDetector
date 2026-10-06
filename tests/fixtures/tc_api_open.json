@@ -1,0 +1,1 @@
+{"access": "PROCESS_VM_OPERATION", "api": "NtOpenProcess", "event_type": "process_open", "operation": "open_process", "result": "success", "source_name": "loader.exe", "source_pid": 4210, "target_name": "target.exe", "target_pid": 3312, "timestamp": "2026-10-05T08:20:01"}

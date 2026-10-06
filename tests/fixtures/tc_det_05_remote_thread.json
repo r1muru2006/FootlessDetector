@@ -1,0 +1,1 @@
+{"event_type": "thread_creation", "operation": "create_remote_thread", "source_name": "loader.exe", "source_pid": 4210, "target_name": "target.exe", "target_pid": 3312, "timestamp": "2026-10-05T08:20:05"}

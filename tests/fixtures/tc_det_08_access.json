@@ -1,0 +1,1 @@
+{"event_type": "process_access", "granted_access": ["PROCESS_VM_OPERATION", "PROCESS_VM_WRITE", "PROCESS_VM_READ"], "operation": "open_process", "requested_access": ["PROCESS_VM_OPERATION", "PROCESS_VM_WRITE", "PROCESS_VM_READ"], "source_name": "loader.exe", "source_pid": 4210, "target_name": "target.exe", "target_pid": 3312, "timestamp": "2026-10-05T08:20:01"}
