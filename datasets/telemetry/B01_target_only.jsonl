@@ -1,0 +1,2 @@
+{"utc":"2026-11-13T01:00:00.000Z","tick_ms":1000,"run_id":"B01_target_only","scenario_id":"B01_target_only","pid":4210,"tid":4211,"event":"source_target","method":"none","source_pid":3312,"target_pid":3312,"target_tid":3313,"target_image":"C:\\Lab\\footless_target.exe"}
+{"utc":"2026-11-13T01:00:00.010Z","tick_ms":1001,"run_id":"B01_target_only","scenario_id":"B01_target_only","pid":4210,"tid":4211,"event":"memory_allocate","operation":"allocate_memory","base_address":"0x800000","size":4096,"memory_protection":"RW"}

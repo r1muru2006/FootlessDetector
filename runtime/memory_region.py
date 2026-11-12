@@ -133,7 +133,12 @@ def _linked_prior_write(
             continue  # self-write carries no injection signal
         address_match = (
             base is not None
-            and base == event.get("target_address", event.get("base"))
+            and base
+            in (
+                event.get("target_address"),
+                event.get("base"),
+                event.get("base_address"),
+            )
         )
         if owner is not None and target != owner and not address_match:
             continue

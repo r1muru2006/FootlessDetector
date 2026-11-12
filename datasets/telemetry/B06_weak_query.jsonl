@@ -1,0 +1,1 @@
+{"utc":"2026-11-13T01:00:00.000Z","tick_ms":1000,"run_id":"B06_weak_query","scenario_id":"B06_weak_query","pid":4210,"tid":4211,"event":"process_open","source_pid":4210,"target_pid":3312,"operation":"open_process","api":"OpenProcess","requested_access":["PROCESS_QUERY_INFORMATION"]}

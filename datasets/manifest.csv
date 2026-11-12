@@ -1,0 +1,23 @@
+scenario_id,label,format,path,technique,expected_marker,controlled_change
+B01_target_only,benign,jsonl,datasets/telemetry/B01_target_only.jsonl,target-only,none,no injector and no cross-process operation
+B02_self_dll,benign,jsonl,datasets/telemetry/B02_self_dll.jsonl,self-load,none,target loads its own marker DLL
+B03_benign_app,benign,jsonl,datasets/telemetry/B03_benign_app.jsonl,normal-app,none,ordinary local memory and self open
+B04_loader_noise,benign,jsonl,datasets/telemetry/B04_loader_noise.jsonl,resolver-only,none,loader resolves APIs but never opens a target
+B05_jit_rwx,benign,jsonl,datasets/telemetry/B05_jit_rwx.jsonl,jit-rwx,none,single same-process RWX region with no injection chain
+B06_weak_query,benign,jsonl,datasets/telemetry/B06_weak_query.jsonl,weak-access,none,cross-process query-only access
+P01_crt,malicious,jsonl,datasets/telemetry/P01_crt.jsonl,create-remote-thread,yes,remote thread starts LoadLibraryW in the target
+P02_nt,malicious,jsonl,datasets/telemetry/P02_nt.jsonl,nt-create-thread-ex,yes,NtCreateThreadEx replaces CreateRemoteThread
+P03_stub,malicious,jsonl,datasets/telemetry/P03_stub.jsonl,rwx-transition-stub,yes,private RW buffer written then protected RX
+P04_apc,malicious,jsonl,datasets/telemetry/P04_apc.jsonl,apc-queue,no-observed,queue on an existing alertable thread
+P05_section,malicious,jsonl,datasets/telemetry/P05_section.jsonl,section-mapping,yes,pagefile section mapped into the target as RX
+P06_quiet_stub,malicious,jsonl,datasets/telemetry/P06_quiet_stub.jsonl,string-hidden,yes,API labels redacted in telemetry
+P07_nt_image,malicious,jsonl,datasets/telemetry/P07_nt_image.jsonl,existing-image-start,yes,thread starts at an address inside the target image
+P08_sysmon_mixed,malicious,jsonl,datasets/telemetry/P08_sysmon_mixed.jsonl,sysmon-correlation,yes,Sysmon EventID 10/8 plus benign noise
+S01_loader,malicious,pe,datasets/pe/footless_loader.exe,api-hashing,not-applicable,baseline FNV resolver build
+S02_loader_seeded,malicious,pe,datasets/pe/footless_loader_seeded.exe,api-hashing,not-applicable,rotate/xor/add resolver variant
+S03_loader_module_api,malicious,pe,datasets/pe/footless_loader_module_api.exe,api-hashing,not-applicable,module:api hash and different key order
+S04_loader_quiet,malicious,pe,datasets/pe/footless_loader_quiet.exe,api-hashing,not-applicable,plaintext API labels removed from binary and log
+S05_loader_seed_alt,malicious,pe,datasets/pe/footless_loader_seed_alt.exe,api-hashing,not-applicable,alternate seed constant for every API hash
+S06_benign_app,benign,pe,datasets/pe/benign_app.exe,benign-control,not-applicable,ordinary imports and local memory only
+S07_target,benign,pe,datasets/pe/footless_target.exe,benign-control,not-applicable,sleeping lab target with no resolver
+S08_marker_dll,benign,pe,datasets/pe/footless_marker.dll,benign-control,not-applicable,non-injecting marker DLL

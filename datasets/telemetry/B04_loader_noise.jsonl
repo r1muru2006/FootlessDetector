@@ -1,0 +1,3 @@
+{"utc":"2026-11-13T01:00:00.000Z","tick_ms":1000,"run_id":"B04_loader_noise","scenario_id":"B04_loader_noise","pid":4210,"tid":4211,"event":"source_target","method":"none","source_pid":4210,"target_pid":4210,"target_image":"C:\\Lab\\footless_loader.exe"}
+{"utc":"2026-11-13T01:00:00.010Z","tick_ms":1001,"run_id":"B04_loader_noise","scenario_id":"B04_loader_noise","pid":4210,"tid":4211,"event":"memory_allocate","operation":"allocate_memory","base_address":"0x1e0000","size":1024,"memory_protection":"RW"}
+{"utc":"2026-11-13T01:00:00.020Z","tick_ms":1002,"run_id":"B04_loader_noise","scenario_id":"B04_loader_noise","pid":4210,"tid":4211,"event":"memory_free","operation":"free_memory","base_address":"0x1e0000","ntstatus":"0x00000000"}

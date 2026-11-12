@@ -1,3 +1,5 @@
+> **Trạng thái:** đây là đặc tả ban đầu. Bản triển khai hoàn chỉnh nằm trong `README.md`, `docs/DETECTION.md`, `docs/EVALUATION.md`, `detection/`, `runtime/` và `reports/`.
+
 # GUIDE.md — Loader Detector
 
 ## 1. Mục tiêu

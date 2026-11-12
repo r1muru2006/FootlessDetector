@@ -1,0 +1,203 @@
+{
+  "generated_utc": "2026-11-12T17:24:49Z",
+  "manifest": "datasets/stress_manifest.csv",
+  "threshold": null,
+  "layers": null,
+  "metrics": {
+    "evaluated": 4,
+    "excluded": 0,
+    "tp": 1,
+    "fp": 1,
+    "tn": 1,
+    "fn": 1,
+    "precision": 0.5,
+    "recall": 0.5,
+    "f1": 0.5,
+    "fpr": 0.5,
+    "accuracy": 0.5,
+    "latency_ms_p50": 0.3,
+    "latency_ms_p95": 16.727,
+    "latency_ms_max": 16.727
+  },
+  "by_format": {
+    "jsonl": {
+      "evaluated": 3,
+      "excluded": 0,
+      "tp": 1,
+      "fp": 1,
+      "tn": 1,
+      "fn": 0,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6666666666666666,
+      "fpr": 0.5,
+      "accuracy": 0.6666666666666666,
+      "latency_ms_p50": 0.3,
+      "latency_ms_p95": 0.386,
+      "latency_ms_max": 0.386
+    },
+    "pe": {
+      "evaluated": 1,
+      "excluded": 0,
+      "tp": 0,
+      "fp": 0,
+      "tn": 0,
+      "fn": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null,
+      "fpr": null,
+      "accuracy": 0.0,
+      "latency_ms_p50": 16.727,
+      "latency_ms_p95": 16.727,
+      "latency_ms_max": 16.727
+    }
+  },
+  "scenarios": [
+    {
+      "scenario_id": "X01_debugger_like",
+      "label": "benign",
+      "format": "jsonl",
+      "path": "datasets/telemetry/X01_debugger_like.jsonl",
+      "technique": "authorized-debugger",
+      "expected_marker": "yes",
+      "controlled_change": "debugger performs the same open/write/thread chain as the PoC",
+      "excluded": false,
+      "label_positive": false,
+      "predicted_alert": true,
+      "verdict": "alert",
+      "score": 17,
+      "evidence_count": 11,
+      "detectors": [
+        "access",
+        "api_chain",
+        "injection_behavior",
+        "process_graph",
+        "remote_thread",
+        "rx_anomaly",
+        "source_target"
+      ],
+      "layers": [
+        "access",
+        "graph",
+        "memory",
+        "runtime"
+      ],
+      "warnings": 0,
+      "latency_ms": 0.386,
+      "evidence_ids": [
+        "ev-api-chain-OpenProcess-5200-6201",
+        "ev-source-target-5200-6201",
+        "ev-access-5200-6201",
+        "ev-api-chain-allocate_memory-5200-6201",
+        "ev-api-chain-write_memory-5200-6201",
+        "ev-api-chain-protect_memory-5200-6201",
+        "ev-rx-anomaly-0x2a0000",
+        "ev-api-chain-CreateRemoteThread-5200-6201",
+        "ev-remote-thread-5200-6201",
+        "ev-graph-5200-6201",
+        "ev-injection-5200-6201"
+      ]
+    },
+    {
+      "scenario_id": "X02_benign_installer",
+      "label": "benign",
+      "format": "jsonl",
+      "path": "datasets/telemetry/X02_benign_installer.jsonl",
+      "technique": "installer",
+      "expected_marker": "none",
+      "controlled_change": "weak query and same-process image load",
+      "excluded": false,
+      "label_positive": false,
+      "predicted_alert": false,
+      "verdict": "suspicious",
+      "score": 3,
+      "evidence_count": 3,
+      "detectors": [
+        "api_chain",
+        "source_target"
+      ],
+      "layers": [
+        "runtime"
+      ],
+      "warnings": 0,
+      "latency_ms": 0.161,
+      "evidence_ids": [
+        "ev-api-chain-OpenProcess-7000-7001",
+        "ev-source-target-7000-7001",
+        "ev-api-chain-LoadLibrary-7000-7001"
+      ]
+    },
+    {
+      "scenario_id": "X03_injectionlab_injector",
+      "label": "malicious",
+      "format": "pe",
+      "path": "datasets/pe/NT230_injector.exe",
+      "technique": "classic-win32-injector",
+      "expected_marker": "not-applicable",
+      "controlled_change": "statically imported Win32 injection APIs with no hash resolver",
+      "excluded": false,
+      "label_positive": true,
+      "predicted_alert": false,
+      "verdict": "clean",
+      "score": 2,
+      "evidence_count": 1,
+      "detectors": [
+        "sensitive_import_cluster"
+      ],
+      "layers": [
+        "static_pe"
+      ],
+      "warnings": 0,
+      "latency_ms": 16.727,
+      "evidence_ids": [
+        "ev-pe-import-cluster-NT230_injector.exe"
+      ]
+    },
+    {
+      "scenario_id": "X04_injectionlab_runtime",
+      "label": "malicious",
+      "format": "jsonl",
+      "path": "datasets/telemetry/X04_injectionlab_runtime.jsonl",
+      "technique": "classic-win32-injector",
+      "expected_marker": "yes",
+      "controlled_change": "same injector observed through runtime telemetry",
+      "excluded": false,
+      "label_positive": true,
+      "predicted_alert": true,
+      "verdict": "alert",
+      "score": 17,
+      "evidence_count": 11,
+      "detectors": [
+        "access",
+        "api_chain",
+        "injection_behavior",
+        "process_graph",
+        "remote_thread",
+        "rx_anomaly",
+        "source_target"
+      ],
+      "layers": [
+        "access",
+        "graph",
+        "memory",
+        "runtime"
+      ],
+      "warnings": 0,
+      "latency_ms": 0.3,
+      "evidence_ids": [
+        "ev-api-chain-OpenProcess-8000-8001",
+        "ev-source-target-8000-8001",
+        "ev-access-8000-8001",
+        "ev-api-chain-allocate_memory-8000-8001",
+        "ev-api-chain-write_memory-8000-8001",
+        "ev-api-chain-protect_memory-8000-8001",
+        "ev-rx-anomaly-0x3b0000",
+        "ev-api-chain-NtCreateThreadEx-8000-8001",
+        "ev-remote-thread-8000-8001",
+        "ev-graph-8000-8001",
+        "ev-injection-8000-8001"
+      ]
+    }
+  ]
+}

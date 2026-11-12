@@ -1,0 +1,3 @@
+{"utc":"2026-11-13T01:00:00.000Z","tick_ms":1000,"run_id":"B02_self_dll","scenario_id":"B02_self_dll","pid":4210,"tid":4211,"event":"source_target","method":"selfdll","source_pid":3312,"target_pid":3312,"target_tid":3313,"target_image":"C:\\Lab\\footless_target.exe"}
+{"utc":"2026-11-13T01:00:00.010Z","tick_ms":1001,"run_id":"B02_self_dll","scenario_id":"B02_self_dll","pid":4210,"tid":4211,"event":"image_load","source_pid":3312,"target_pid":3312,"image_loaded":"C:\\Lab\\footless_marker.dll"}
+{"utc":"2026-11-13T01:00:00.020Z","tick_ms":1002,"run_id":"B02_self_dll","scenario_id":"B02_self_dll","pid":4210,"tid":4211,"event":"memory_allocate","operation":"allocate_memory","base_address":"0x800000","size":4096,"memory_protection":"RW"}

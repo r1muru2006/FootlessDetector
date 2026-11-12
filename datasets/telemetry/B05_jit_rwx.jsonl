@@ -1,0 +1,1 @@
+{"utc":"2026-11-13T01:00:00.000Z","tick_ms":1000,"run_id":"B05_jit_rwx","scenario_id":"B05_jit_rwx","pid":4210,"tid":4211,"event":"memory_allocate","source_pid":5150,"target_pid":5150,"operation":"allocate_memory","base_address":"0xa00000","size":65536,"memory_protection":"RWX"}

@@ -1,1 +1,53 @@
+# ============================================================
+# Footless-detector — Python scratch, caches and local output
+# ============================================================
+
+# Python bytecode and packaging
 __pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Virtual environments and local secrets
+.venv/
+venv/
+env/
+.env
+.env.*
+
+# Test / lint / type caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.benchmarks/
+
+# Local compiled samples: rebuild with tools/sync_samples.py
+datasets/pe/*.exe
+datasets/pe/*.dll
+datasets/pe/SHA256.txt
+datasets/pe/__pycache__/
+
+# Local ad-hoc detector output (keep reports/ and datasets/ tracked)
+*.local.json
+*.local.jsonl
+*.local.md
+*.tmp
+*.log
+sysmon.evtx
+telemetry-status.json
+
+# Editor / OS junk
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+desktop.ini

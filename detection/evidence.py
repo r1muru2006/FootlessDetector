@@ -9,14 +9,23 @@ from typing import Any, Dict, List
 
 REQUIRED_EVIDENCE_KEYS = ("area", "detector", "details", "weight")
 
-ALLOWED_AREAS = ("static", "runtime", "memory", "access")
+ALLOWED_AREAS = ("static", "static_pe", "runtime", "memory", "access", "graph")
 
 # U1 scoring weights (functional-design Q1 table, U1 scope).
 WEIGHTS = {
     "hash_loop": 2,
-    "import_anomaly": 1,
+    "dynamic_resolve": 3,
+    "import_anomaly": 2,
+    "packed": 2,
+    "rwx_section": 3,
     "api_chain": 1,
     "source_target": 1,
+    "remote_thread": 3,
+    "rwx": 3,
+    "rx_anomaly": 2,
+    "access": 2,
+    "injection_behavior": 2,
+    "process_graph": 2,
 }
 
 _evidence_counter = 0

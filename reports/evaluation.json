@@ -1,0 +1,760 @@
+{
+  "generated_utc": "2026-11-12T17:24:48Z",
+  "manifest": "datasets/manifest.csv",
+  "threshold": null,
+  "layers": null,
+  "metrics": {
+    "evaluated": 22,
+    "excluded": 0,
+    "tp": 13,
+    "fp": 0,
+    "tn": 9,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "fpr": 0.0,
+    "accuracy": 1.0,
+    "latency_ms_p50": 0.187,
+    "latency_ms_p95": 17.554,
+    "latency_ms_max": 17.624
+  },
+  "by_format": {
+    "jsonl": {
+      "evaluated": 14,
+      "excluded": 0,
+      "tp": 8,
+      "fp": 0,
+      "tn": 6,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "fpr": 0.0,
+      "accuracy": 1.0,
+      "latency_ms_p50": 0.145,
+      "latency_ms_p95": 0.194,
+      "latency_ms_max": 0.194
+    },
+    "pe": {
+      "evaluated": 8,
+      "excluded": 0,
+      "tp": 5,
+      "fp": 0,
+      "tn": 3,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "fpr": 0.0,
+      "accuracy": 1.0,
+      "latency_ms_p50": 16.374,
+      "latency_ms_p95": 17.624,
+      "latency_ms_max": 17.624
+    }
+  },
+  "scenarios": [
+    {
+      "scenario_id": "B01_target_only",
+      "label": "benign",
+      "format": "jsonl",
+      "path": "datasets/telemetry/B01_target_only.jsonl",
+      "technique": "target-only",
+      "expected_marker": "none",
+      "controlled_change": "no injector and no cross-process operation",
+      "excluded": false,
+      "label_positive": false,
+      "predicted_alert": false,
+      "verdict": "clean",
+      "score": 1,
+      "evidence_count": 1,
+      "detectors": [
+        "api_chain"
+      ],
+      "layers": [
+        "runtime"
+      ],
+      "warnings": 0,
+      "latency_ms": 0.145,
+      "evidence_ids": [
+        "ev-api-chain-allocate_memory-3312-3312"
+      ]
+    },
+    {
+      "scenario_id": "B02_self_dll",
+      "label": "benign",
+      "format": "jsonl",
+      "path": "datasets/telemetry/B02_self_dll.jsonl",
+      "technique": "self-load",
+      "expected_marker": "none",
+      "controlled_change": "target loads its own marker DLL",
+      "excluded": false,
+      "label_positive": false,
+      "predicted_alert": false,
+      "verdict": "clean",
+      "score": 2,
+      "evidence_count": 2,
+      "detectors": [
+        "api_chain"
+      ],
+      "layers": [
+        "runtime"
+      ],
+      "warnings": 0,
+      "latency_ms": 0.114,
+      "evidence_ids": [
+        "ev-api-chain-LoadLibrary-3312-3312",
+        "ev-api-chain-allocate_memory-3312-3312"
+      ]
+    },
+    {
+      "scenario_id": "B03_benign_app",
+      "label": "benign",
+      "format": "jsonl",
+      "path": "datasets/telemetry/B03_benign_app.jsonl",
+      "technique": "normal-app",
+      "expected_marker": "none",
+      "controlled_change": "ordinary local memory and self open",
+      "excluded": false,
+      "label_positive": false,
+      "predicted_alert": false,
+      "verdict": "clean",
+      "score": 2,
+      "evidence_count": 2,
+      "detectors": [
+        "api_chain"
+      ],
+      "layers": [
+        "runtime"
+      ],
+      "warnings": 0,
+      "latency_ms": 0.098,
+      "evidence_ids": [
+        "ev-api-chain-allocate_memory-5150-5150",
+        "ev-api-chain-OpenProcess-5150-5150"
+      ]
+    },
+    {
+      "scenario_id": "B04_loader_noise",
+      "label": "benign",
+      "format": "jsonl",
+      "path": "datasets/telemetry/B04_loader_noise.jsonl",
+      "technique": "resolver-only",
+      "expected_marker": "none",
+      "controlled_change": "loader resolves APIs but never opens a target",
+      "excluded": false,
+      "label_positive": false,
+      "predicted_alert": false,
+      "verdict": "clean",
+      "score": 1,
+      "evidence_count": 1,
+      "detectors": [
+        "api_chain"
+      ],
+      "layers": [
+        "runtime"
+      ],
+      "warnings": 0,
+      "latency_ms": 0.071,
+      "evidence_ids": [
+        "ev-api-chain-allocate_memory-4210-4210"
+      ]
+    },
+    {
+      "scenario_id": "B05_jit_rwx",
+      "label": "benign",
+      "format": "jsonl",
+      "path": "datasets/telemetry/B05_jit_rwx.jsonl",
+      "technique": "jit-rwx",
+      "expected_marker": "none",
+      "controlled_change": "single same-process RWX region with no injection chain",
+      "excluded": false,
+      "label_positive": false,
+      "predicted_alert": false,
+      "verdict": "suspicious",
+      "score": 3,
+      "evidence_count": 1,
+      "detectors": [
+        "rwx"
+      ],
+      "layers": [
+        "memory"
+      ],
+      "warnings": 3,
+      "latency_ms": 0.096,
+      "evidence_ids": [
+        "ev-rwx-0xa00000"
+      ]
+    },
+    {
+      "scenario_id": "B06_weak_query",
+      "label": "benign",
+      "format": "jsonl",
+      "path": "datasets/telemetry/B06_weak_query.jsonl",
+      "technique": "weak-access",
+      "expected_marker": "none",
+      "controlled_change": "cross-process query-only access",
+      "excluded": false,
+      "label_positive": false,
+      "predicted_alert": false,
+      "verdict": "clean",
+      "score": 2,
+      "evidence_count": 2,
+      "detectors": [
+        "api_chain",
+        "source_target"
+      ],
+      "layers": [
+        "runtime"
+      ],
+      "warnings": 0,
+      "latency_ms": 0.074,
+      "evidence_ids": [
+        "ev-api-chain-OpenProcess-4210-3312",
+        "ev-source-target-4210-3312"
+      ]
+    },
+    {
+      "scenario_id": "P01_crt",
+      "label": "malicious",
+      "format": "jsonl",
+      "path": "datasets/telemetry/P01_crt.jsonl",
+      "technique": "create-remote-thread",
+      "expected_marker": "yes",
+      "controlled_change": "remote thread starts LoadLibraryW in the target",
+      "excluded": false,
+      "label_positive": true,
+      "predicted_alert": true,
+      "verdict": "alert",
+      "score": 12,
+      "evidence_count": 8,
+      "detectors": [
+        "access",
+        "api_chain",
+        "process_graph",
+        "remote_thread",
+        "source_target"
+      ],
+      "layers": [
+        "access",
+        "graph",
+        "runtime"
+      ],
+      "warnings": 0,
+      "latency_ms": 0.187,
+      "evidence_ids": [
+        "ev-api-chain-NtOpenProcess-4210-3312",
+        "ev-source-target-4210-3312",
+        "ev-access-4210-3312",
+        "ev-api-chain-allocate_memory-4210-3312",
+        "ev-api-chain-write_memory-4210-3312",
+        "ev-api-chain-CreateRemoteThread-4210-3312",
+        "ev-remote-thread-4210-3312",
+        "ev-graph-4210-3312"
+      ]
+    },
+    {
+      "scenario_id": "P02_nt",
+      "label": "malicious",
+      "format": "jsonl",
+      "path": "datasets/telemetry/P02_nt.jsonl",
+      "technique": "nt-create-thread-ex",
+      "expected_marker": "yes",
+      "controlled_change": "NtCreateThreadEx replaces CreateRemoteThread",
+      "excluded": false,
+      "label_positive": true,
+      "predicted_alert": true,
+      "verdict": "alert",
+      "score": 12,
+      "evidence_count": 8,
+      "detectors": [
+        "access",
+        "api_chain",
+        "process_graph",
+        "remote_thread",
+        "source_target"
+      ],
+      "layers": [
+        "access",
+        "graph",
+        "runtime"
+      ],
+      "warnings": 0,
+      "latency_ms": 0.154,
+      "evidence_ids": [
+        "ev-api-chain-NtOpenProcess-4210-3312",
+        "ev-source-target-4210-3312",
+        "ev-access-4210-3312",
+        "ev-api-chain-allocate_memory-4210-3312",
+        "ev-api-chain-write_memory-4210-3312",
+        "ev-api-chain-NtCreateThreadEx-4210-3312",
+        "ev-remote-thread-4210-3312",
+        "ev-graph-4210-3312"
+      ]
+    },
+    {
+      "scenario_id": "P03_stub",
+      "label": "malicious",
+      "format": "jsonl",
+      "path": "datasets/telemetry/P03_stub.jsonl",
+      "technique": "rwx-transition-stub",
+      "expected_marker": "yes",
+      "controlled_change": "private RW buffer written then protected RX",
+      "excluded": false,
+      "label_positive": true,
+      "predicted_alert": true,
+      "verdict": "alert",
+      "score": 17,
+      "evidence_count": 11,
+      "detectors": [
+        "access",
+        "api_chain",
+        "injection_behavior",
+        "process_graph",
+        "remote_thread",
+        "rx_anomaly",
+        "source_target"
+      ],
+      "layers": [
+        "access",
+        "graph",
+        "memory",
+        "runtime"
+      ],
+      "warnings": 0,
+      "latency_ms": 0.194,
+      "evidence_ids": [
+        "ev-api-chain-NtOpenProcess-4210-3312",
+        "ev-source-target-4210-3312",
+        "ev-access-4210-3312",
+        "ev-api-chain-allocate_memory-4210-3312",
+        "ev-api-chain-write_memory-4210-3312",
+        "ev-api-chain-protect_memory-4210-3312",
+        "ev-rx-anomaly-0x1f0000",
+        "ev-api-chain-NtCreateThreadEx-4210-3312",
+        "ev-remote-thread-4210-3312",
+        "ev-graph-4210-3312",
+        "ev-injection-4210-3312"
+      ]
+    },
+    {
+      "scenario_id": "P04_apc",
+      "label": "malicious",
+      "format": "jsonl",
+      "path": "datasets/telemetry/P04_apc.jsonl",
+      "technique": "apc-queue",
+      "expected_marker": "no-observed",
+      "controlled_change": "queue on an existing alertable thread",
+      "excluded": false,
+      "label_positive": true,
+      "predicted_alert": true,
+      "verdict": "alert",
+      "score": 14,
+      "evidence_count": 10,
+      "detectors": [
+        "access",
+        "api_chain",
+        "injection_behavior",
+        "process_graph",
+        "rx_anomaly",
+        "source_target"
+      ],
+      "layers": [
+        "access",
+        "graph",
+        "memory",
+        "runtime"
+      ],
+      "warnings": 0,
+      "latency_ms": 0.191,
+      "evidence_ids": [
+        "ev-api-chain-NtOpenProcess-4210-3312",
+        "ev-source-target-4210-3312",
+        "ev-access-4210-3312",
+        "ev-api-chain-allocate_memory-4210-3312",
+        "ev-api-chain-write_memory-4210-3312",
+        "ev-api-chain-protect_memory-4210-3312",
+        "ev-rx-anomaly-0x1f0000",
+        "ev-api-chain-NtQueueApcThread-4210-3312",
+        "ev-graph-4210-3312",
+        "ev-injection-4210-3312"
+      ]
+    },
+    {
+      "scenario_id": "P05_section",
+      "label": "malicious",
+      "format": "jsonl",
+      "path": "datasets/telemetry/P05_section.jsonl",
+      "technique": "section-mapping",
+      "expected_marker": "yes",
+      "controlled_change": "pagefile section mapped into the target as RX",
+      "excluded": false,
+      "label_positive": true,
+      "predicted_alert": true,
+      "verdict": "alert",
+      "score": 17,
+      "evidence_count": 11,
+      "detectors": [
+        "access",
+        "api_chain",
+        "injection_behavior",
+        "process_graph",
+        "remote_thread",
+        "rx_anomaly",
+        "source_target"
+      ],
+      "layers": [
+        "access",
+        "graph",
+        "memory",
+        "runtime"
+      ],
+      "warnings": 0,
+      "latency_ms": 0.19,
+      "evidence_ids": [
+        "ev-api-chain-NtOpenProcess-4210-3312",
+        "ev-source-target-4210-3312",
+        "ev-access-4210-3312",
+        "ev-api-chain-map_section-4210-3312",
+        "ev-api-chain-write_memory-4210-3312",
+        "ev-api-chain-protect_memory-4210-3312",
+        "ev-rx-anomaly-0x1f1000",
+        "ev-api-chain-NtCreateThreadEx-4210-3312",
+        "ev-remote-thread-4210-3312",
+        "ev-graph-4210-3312",
+        "ev-injection-4210-3312"
+      ]
+    },
+    {
+      "scenario_id": "P06_quiet_stub",
+      "label": "malicious",
+      "format": "jsonl",
+      "path": "datasets/telemetry/P06_quiet_stub.jsonl",
+      "technique": "string-hidden",
+      "expected_marker": "yes",
+      "controlled_change": "API labels redacted in telemetry",
+      "excluded": false,
+      "label_positive": true,
+      "predicted_alert": true,
+      "verdict": "alert",
+      "score": 17,
+      "evidence_count": 11,
+      "detectors": [
+        "access",
+        "api_chain",
+        "injection_behavior",
+        "process_graph",
+        "remote_thread",
+        "rx_anomaly",
+        "source_target"
+      ],
+      "layers": [
+        "access",
+        "graph",
+        "memory",
+        "runtime"
+      ],
+      "warnings": 0,
+      "latency_ms": 0.179,
+      "evidence_ids": [
+        "ev-api-chain-NtOpenProcess-4210-3312",
+        "ev-source-target-4210-3312",
+        "ev-access-4210-3312",
+        "ev-api-chain-allocate_memory-4210-3312",
+        "ev-api-chain-write_memory-4210-3312",
+        "ev-api-chain-protect_memory-4210-3312",
+        "ev-rx-anomaly-0x1f0000",
+        "ev-api-chain-api-4210-3312",
+        "ev-remote-thread-4210-3312",
+        "ev-graph-4210-3312",
+        "ev-injection-4210-3312"
+      ]
+    },
+    {
+      "scenario_id": "P07_nt_image",
+      "label": "malicious",
+      "format": "jsonl",
+      "path": "datasets/telemetry/P07_nt_image.jsonl",
+      "technique": "existing-image-start",
+      "expected_marker": "yes",
+      "controlled_change": "thread starts at an address inside the target image",
+      "excluded": false,
+      "label_positive": true,
+      "predicted_alert": true,
+      "verdict": "alert",
+      "score": 8,
+      "evidence_count": 5,
+      "detectors": [
+        "access",
+        "api_chain",
+        "remote_thread",
+        "source_target"
+      ],
+      "layers": [
+        "access",
+        "runtime"
+      ],
+      "warnings": 0,
+      "latency_ms": 0.113,
+      "evidence_ids": [
+        "ev-api-chain-NtOpenProcess-4210-3312",
+        "ev-source-target-4210-3312",
+        "ev-access-4210-3312",
+        "ev-api-chain-NtCreateThreadEx-4210-3312",
+        "ev-remote-thread-4210-3312"
+      ]
+    },
+    {
+      "scenario_id": "P08_sysmon_mixed",
+      "label": "malicious",
+      "format": "jsonl",
+      "path": "datasets/telemetry/P08_sysmon_mixed.jsonl",
+      "technique": "sysmon-correlation",
+      "expected_marker": "yes",
+      "controlled_change": "Sysmon EventID 10/8 plus benign noise",
+      "excluded": false,
+      "label_positive": true,
+      "predicted_alert": true,
+      "verdict": "alert",
+      "score": 11,
+      "evidence_count": 8,
+      "detectors": [
+        "access",
+        "api_chain",
+        "remote_thread",
+        "source_target"
+      ],
+      "layers": [
+        "access",
+        "runtime"
+      ],
+      "warnings": 0,
+      "latency_ms": 0.149,
+      "evidence_ids": [
+        "ev-api-chain-OpenProcess-4210-3312",
+        "ev-source-target-4210-3312",
+        "ev-access-4210-3312",
+        "ev-api-chain-CreateRemoteThread-4210-3312",
+        "ev-remote-thread-4210-3312",
+        "ev-api-chain-OpenProcess-6200-6201",
+        "ev-source-target-6200-6201",
+        "ev-api-chain-LoadLibrary-6201-6201"
+      ]
+    },
+    {
+      "scenario_id": "S01_loader",
+      "label": "malicious",
+      "format": "pe",
+      "path": "datasets/pe/footless_loader.exe",
+      "technique": "api-hashing",
+      "expected_marker": "not-applicable",
+      "controlled_change": "baseline FNV resolver build",
+      "excluded": false,
+      "label_positive": true,
+      "predicted_alert": true,
+      "verdict": "alert",
+      "score": 7,
+      "evidence_count": 3,
+      "detectors": [
+        "dynamic_resolve",
+        "hash_loop",
+        "import_anomaly"
+      ],
+      "layers": [
+        "static",
+        "static_pe"
+      ],
+      "warnings": 0,
+      "latency_ms": 16.752,
+      "evidence_ids": [
+        "ev-pe-hash-loop-footless_loader.exe",
+        "ev-pe-dynamic-resolve-footless_loader.exe",
+        "ev-pe-import-gap-footless_loader.exe"
+      ]
+    },
+    {
+      "scenario_id": "S02_loader_seeded",
+      "label": "malicious",
+      "format": "pe",
+      "path": "datasets/pe/footless_loader_seeded.exe",
+      "technique": "api-hashing",
+      "expected_marker": "not-applicable",
+      "controlled_change": "rotate/xor/add resolver variant",
+      "excluded": false,
+      "label_positive": true,
+      "predicted_alert": true,
+      "verdict": "alert",
+      "score": 7,
+      "evidence_count": 3,
+      "detectors": [
+        "dynamic_resolve",
+        "hash_loop",
+        "import_anomaly"
+      ],
+      "layers": [
+        "static",
+        "static_pe"
+      ],
+      "warnings": 0,
+      "latency_ms": 17.554,
+      "evidence_ids": [
+        "ev-pe-hash-loop-footless_loader_seeded.exe",
+        "ev-pe-dynamic-resolve-footless_loader_seeded.exe",
+        "ev-pe-import-gap-footless_loader_seeded.exe"
+      ]
+    },
+    {
+      "scenario_id": "S03_loader_module_api",
+      "label": "malicious",
+      "format": "pe",
+      "path": "datasets/pe/footless_loader_module_api.exe",
+      "technique": "api-hashing",
+      "expected_marker": "not-applicable",
+      "controlled_change": "module:api hash and different key order",
+      "excluded": false,
+      "label_positive": true,
+      "predicted_alert": true,
+      "verdict": "alert",
+      "score": 7,
+      "evidence_count": 3,
+      "detectors": [
+        "dynamic_resolve",
+        "hash_loop",
+        "import_anomaly"
+      ],
+      "layers": [
+        "static",
+        "static_pe"
+      ],
+      "warnings": 0,
+      "latency_ms": 17.624,
+      "evidence_ids": [
+        "ev-pe-hash-loop-footless_loader_module_api.exe",
+        "ev-pe-dynamic-resolve-footless_loader_module_api.exe",
+        "ev-pe-import-gap-footless_loader_module_api.exe"
+      ]
+    },
+    {
+      "scenario_id": "S04_loader_quiet",
+      "label": "malicious",
+      "format": "pe",
+      "path": "datasets/pe/footless_loader_quiet.exe",
+      "technique": "api-hashing",
+      "expected_marker": "not-applicable",
+      "controlled_change": "plaintext API labels removed from binary and log",
+      "excluded": false,
+      "label_positive": true,
+      "predicted_alert": true,
+      "verdict": "alert",
+      "score": 7,
+      "evidence_count": 3,
+      "detectors": [
+        "dynamic_resolve",
+        "hash_loop",
+        "import_anomaly"
+      ],
+      "layers": [
+        "static",
+        "static_pe"
+      ],
+      "warnings": 0,
+      "latency_ms": 16.374,
+      "evidence_ids": [
+        "ev-pe-hash-loop-footless_loader_quiet.exe",
+        "ev-pe-dynamic-resolve-footless_loader_quiet.exe",
+        "ev-pe-import-gap-footless_loader_quiet.exe"
+      ]
+    },
+    {
+      "scenario_id": "S05_loader_seed_alt",
+      "label": "malicious",
+      "format": "pe",
+      "path": "datasets/pe/footless_loader_seed_alt.exe",
+      "technique": "api-hashing",
+      "expected_marker": "not-applicable",
+      "controlled_change": "alternate seed constant for every API hash",
+      "excluded": false,
+      "label_positive": true,
+      "predicted_alert": true,
+      "verdict": "alert",
+      "score": 7,
+      "evidence_count": 3,
+      "detectors": [
+        "dynamic_resolve",
+        "hash_loop",
+        "import_anomaly"
+      ],
+      "layers": [
+        "static",
+        "static_pe"
+      ],
+      "warnings": 0,
+      "latency_ms": 16.479,
+      "evidence_ids": [
+        "ev-pe-hash-loop-footless_loader_seed_alt.exe",
+        "ev-pe-dynamic-resolve-footless_loader_seed_alt.exe",
+        "ev-pe-import-gap-footless_loader_seed_alt.exe"
+      ]
+    },
+    {
+      "scenario_id": "S06_benign_app",
+      "label": "benign",
+      "format": "pe",
+      "path": "datasets/pe/benign_app.exe",
+      "technique": "benign-control",
+      "expected_marker": "not-applicable",
+      "controlled_change": "ordinary imports and local memory only",
+      "excluded": false,
+      "label_positive": false,
+      "predicted_alert": false,
+      "verdict": "clean",
+      "score": 0,
+      "evidence_count": 0,
+      "detectors": [],
+      "layers": [],
+      "warnings": 0,
+      "latency_ms": 10.795,
+      "evidence_ids": []
+    },
+    {
+      "scenario_id": "S07_target",
+      "label": "benign",
+      "format": "pe",
+      "path": "datasets/pe/footless_target.exe",
+      "technique": "benign-control",
+      "expected_marker": "not-applicable",
+      "controlled_change": "sleeping lab target with no resolver",
+      "excluded": false,
+      "label_positive": false,
+      "predicted_alert": false,
+      "verdict": "clean",
+      "score": 0,
+      "evidence_count": 0,
+      "detectors": [],
+      "layers": [],
+      "warnings": 0,
+      "latency_ms": 11.774,
+      "evidence_ids": []
+    },
+    {
+      "scenario_id": "S08_marker_dll",
+      "label": "benign",
+      "format": "pe",
+      "path": "datasets/pe/footless_marker.dll",
+      "technique": "benign-control",
+      "expected_marker": "not-applicable",
+      "controlled_change": "non-injecting marker DLL",
+      "excluded": false,
+      "label_positive": false,
+      "predicted_alert": false,
+      "verdict": "clean",
+      "score": 0,
+      "evidence_count": 0,
+      "detectors": [],
+      "layers": [],
+      "warnings": 0,
+      "latency_ms": 10.423,
+      "evidence_ids": []
+    }
+  ]
+}

@@ -14,7 +14,9 @@ SUSPICIOUS_THRESHOLD = 3
 WEIGHTS = {
     "hash_loop": 2,
     "dynamic_resolve": 3,
-    "import_anomaly": 1,
+    "import_anomaly": 2,
+    "packed": 2,
+    "rwx_section": 3,
     "api_chain": 1,
     "source_target": 1,
     "remote_thread": 3,
@@ -22,6 +24,18 @@ WEIGHTS = {
     "rx_anomaly": 2,
     "access": 2,
     "injection_behavior": 2,
+    "process_graph": 2,
+    "process_tampering": 3,
+}
+
+# Layer names explain which evidence families participated in an alert.
+LAYER_LABELS = {
+    "static": "static-code",
+    "static_pe": "static-pe",
+    "runtime": "runtime-api",
+    "memory": "memory",
+    "access": "access-rights",
+    "graph": "process-graph",
 }
 
 # Detectors whose evidence marks an executable memory region (FR7.1).
@@ -34,6 +48,7 @@ _alert_counter = 0
 
 def score_evidence(
     evidence: List[Dict[str, Any]],
+    threshold: Optional[int] = None,
 ) -> Tuple[int, int, str]:
     """Return (weighted_sum, distinct_area_count, tier) without side effects."""
     total = sum(int(item.get("weight", 0)) for item in evidence)
@@ -43,7 +58,8 @@ def score_evidence(
         if total >= SUSPICIOUS_THRESHOLD:
             return total, len(areas), "suspicious"
         return total, len(areas), "clean"
-    if total >= ALERT_THRESHOLD and len(areas) >= 2:
+    limit = ALERT_THRESHOLD if threshold is None else threshold
+    if total >= limit and len(areas) >= 2:
         return total, len(areas), "alert"
     if total >= SUSPICIOUS_THRESHOLD:
         return total, len(areas), "suspicious"
@@ -52,6 +68,8 @@ def score_evidence(
 
 def correlate(
     evidence: List[Dict[str, Any]],
+    allowlist: Optional[Any] = None,
+    threshold: Optional[int] = None,
 ) -> Tuple[Optional[Dict[str, Any]], str]:
     """Apply tiers + guard; return (alert_or_None, verdict).
 
@@ -59,7 +77,7 @@ def correlate(
     verdict string with alert None.
     """
     global _alert_counter
-    score, _, verdict = score_evidence(evidence)
+    score, _, verdict = score_evidence(evidence, threshold)
     if verdict != "alert":
         return None, verdict
     _alert_counter += 1
@@ -67,11 +85,21 @@ def correlate(
         item.get("evidence_id", "ev-unknown-%d" % index)
         for index, item in enumerate(evidence)
     ]
+    areas = sorted(
+        {item.get("area") for item in evidence if item.get("area")}
+    )
+    detectors = sorted(
+        {item.get("detector") for item in evidence if item.get("detector")}
+    )
     alert: Dict[str, Any] = {
         "alert_id": "alert-%d" % _alert_counter,
         "verdict": "alert",
         "score": score,
         "chains": chains,
+        "layers": [LAYER_LABELS.get(area, area) for area in areas],
+        "detectors": detectors,
+        "summary": "correlated %d evidence items across %d layers"
+        % (len(evidence), len(areas)),
     }
     return alert, verdict
 

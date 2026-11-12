@@ -1,0 +1,4 @@
+{"EventID":10,"UtcTime":"2026-11-13T01:10:00.000Z","SourceImage":"C:\\Lab\\footless_loader.exe","TargetImage":"C:\\Lab\\footless_target.exe","SourceProcessId":4210,"TargetProcessId":3312,"GrantedAccess":"0x10143a"}
+{"EventID":8,"UtcTime":"2026-11-13T01:10:00.010Z","SourceImage":"C:\\Lab\\footless_loader.exe","TargetImage":"C:\\Lab\\footless_target.exe","SourceProcessId":4210,"TargetProcessId":3312,"NewThreadId":3314,"StartAddress":"0x1f1000"}
+{"EventID":10,"UtcTime":"2026-11-13T01:10:00.020Z","SourceImage":"C:\\Windows\\System32\\taskmgr.exe","TargetImage":"C:\\Windows\\System32\\notepad.exe","SourceProcessId":6200,"TargetProcessId":6201,"GrantedAccess":"0x1000"}
+{"EventID":7,"UtcTime":"2026-11-13T01:10:00.030Z","Image":"C:\\Windows\\System32\\notepad.exe","ImageLoaded":"C:\\Windows\\System32\\shell32.dll","ProcessId":6201}

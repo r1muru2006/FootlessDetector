@@ -1,0 +1,5 @@
+scenario_id,label,format,path,technique,expected_marker,controlled_change
+X01_debugger_like,benign,jsonl,datasets/telemetry/X01_debugger_like.jsonl,authorized-debugger,yes,debugger performs the same open/write/thread chain as the PoC
+X02_benign_installer,benign,jsonl,datasets/telemetry/X02_benign_installer.jsonl,installer,none,weak query and same-process image load
+X03_injectionlab_injector,malicious,pe,datasets/pe/NT230_injector.exe,classic-win32-injector,not-applicable,statically imported Win32 injection APIs with no hash resolver
+X04_injectionlab_runtime,malicious,jsonl,datasets/telemetry/X04_injectionlab_runtime.jsonl,classic-win32-injector,yes,same injector observed through runtime telemetry
